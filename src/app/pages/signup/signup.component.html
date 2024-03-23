@@ -1,0 +1,81 @@
+<section class="signup d-flex align-items-center vh-100">
+    <div class="container boxShadow">
+        <div class="signup-content row">
+            <div class="signup-form col-md-6">
+                <h2 class="form-title fs-2">Sign up</h2>
+                <form [formGroup]="registerForm" (ngSubmit)="handleRegisterForm()" class="register-form mt-4" id="register-form">
+                    <div class="form-group d-flex align-items-center ">
+                        <label for="name">
+                            <span class="fa-solid fa-user"></span>
+                        </label>
+                        <input formControlName="name" type="text" name="name" id="name" placeholder="Your Name" />
+                    </div>
+                    <p class="alert alert-danger " *ngIf="registerForm.get('name')?.errors && registerForm.get('name')?.touched">
+                        <span *ngIf="registerForm.get('name')?.getError('required')">name is required</span>
+                        <span *ngIf="registerForm.get('name')?.getError('minlength')">min length is 3 character</span>
+                    </p>
+                  
+                    <div class="form-group d-flex align-items-center mt-4">
+                        <label for="email">
+                            <span class="fa-solid fa-envelope"></span>
+                        </label>
+                        <input formControlName="email"  type="email" name="email" id="email" placeholder="Your Email" />
+                    </div>
+                    <p class="alert alert-danger " *ngIf="registerForm.get('email')?.errors && registerForm.get('email')?.touched">
+                        <span *ngIf="registerForm.get('email')?.getError('required')">email is required</span>
+                        <span *ngIf="registerForm.get('email')?.getError('email')">please enter valid email</span>
+                    </p>
+                
+                    <div class="form-group d-flex align-items-center mt-4  eyePass position-relative">
+                        <label for="pass">
+                            <span class="fa-solid fa-lock"></span>
+                        </label>
+                        <input formControlName="password" #passwordInput  type="password" name="password" id="password" placeholder="Password" />
+                        <span class="btn my-0 py-0 position-absolute" (click)="togglePasswordVisibility(passwordInput)">
+                            <i class="fa-solid fa-eye text-dark position-absolute "  *ngIf="inputType == 'password'" id="openeye"></i>
+                           <i class="fa-solid fa-eye-slash text-dark position-absolute "  *ngIf="inputType === 'text'"   id="closeeye"></i>
+                        </span>
+                    </div>
+                    <p class="alert alert-danger " *ngIf="registerForm.get('password')?.errors && registerForm.get('password')?.touched">
+                        <span *ngIf="registerForm.get('password')?.getError('required')">password is required</span>
+                        <span *ngIf="registerForm.get('password')?.getError('pattern')"> * you should start with cabital letter . <br> *min length is 7 .</span>
+                    </p>
+                    
+                    <div class="form-group d-flex align-items-center mt-4">
+                        <label for="phone">
+                            <span class="fa-solid fa-phone"></span>
+                        </label>
+                        <input formControlName="phone" type="tel" name="phone" id="phone" placeholder="Phone" />
+                    </div>
+                    <p class="alert alert-danger " *ngIf="registerForm.get('phone')?.errors && registerForm.get('phone')?.touched">
+                        <span *ngIf="registerForm.get('phone')?.getError('required')">phone is required</span>
+                        <span *ngIf="registerForm.get('phone')?.getError('pattern')">please inter egyption phone</span>
+                    </p>
+                    <div class="form-group d-flex align-items-center mt-4">
+                        <label for="age">
+                            <span class="fa-solid fa-globe"></span>
+                        </label>
+                        <input formControlName="age" type="number" name="age" id="age" placeholder="Age" />
+                    </div>
+                    <p class="alert alert-danger " *ngIf="registerForm.get('age')?.errors && registerForm.get('age')?.touched">
+                        <span *ngIf="registerForm.get('age')?.getError('required')">age is required</span>
+                    
+                    </p>
+                    <div class="alert alert-danger" *ngIf="errorAPI" >{{errorAPI}}</div>
+                    <div class="d-flex justify-content-center align-items-center flex-column">
+                        <button class="btn btn-danger mt-4" [disabled]="registerForm.invalid">
+                            <i *ngIf="isLoading" class="fa fa-spinner fa-spin"></i>
+                            <span>Register</span>
+                        </button>
+                        <p class="my-3">Already Have an account?
+                            <a class="text-info" (click)="signIN()">Signin</a>
+                        </p> 
+                    </div>
+                </form>
+            </div>
+            <div class="signup-image col-md-6 d-flex justify-content-center">
+                <figure><img src="assets/images/signup-image.jpg" alt="sing up image"/></figure>
+            </div>
+        </div>
+    </div>
+</section>
